@@ -1,0 +1,38 @@
+thead {font-weight: bold;}
+.container-login{
+	width: 100%; 
+	height: 100%
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.vcenter h1{
+	font-size: 72px;
+}
+.margin-no{
+	margin: 0px;
+}
+.bg-custom{
+	color: #fff; 
+	margin: 0px 0px 20px 0px; 
+	padding: 10px;
+}
+.bg-custom h1{
+	margin: 10px 0px;
+}
+.bg-dark{
+	color: #fff; 
+	background-color: #222;
+}
+.bg-primary{
+	color: #fff; 
+	background-color: #226aaa;
+}
+.list_item {
+	cursor: pointer;
+}
+#current {
+	color:red;
+}

@@ -1,0 +1,5 @@
+<?switch($action):
+	default:?>
+
+	<?break;?>
+<?endswitch?>
