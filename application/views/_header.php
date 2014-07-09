@@ -4,6 +4,7 @@ $header_color = array('#226aaa','#226aaa','#32be6a','#226aaa','#32be6a');
 $active[$current] = ' class="active"';
 $search_options = array('1' => array('name' => '企业名称', 'type' => '企业类型', 'industry' => '企业分类', 'kind' => '企业性质'),
                         '3' => array('name' => '个人姓名'));
+$cookie = $this->auth->is_logged_in();
 ?>
 <html>
 <head>
@@ -68,6 +69,9 @@ $search_options = array('1' => array('name' => '企业名称', 'type' => '企业
         <li class="dropdown">
           <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"> <?=$user_data['name']?><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
+            <?if($cookie['role']=='1111'):?>
+            <li><a class="glyphicon glyphicon-asterisk" href="users"> 用户管理</a></li>
+            <?endif?>
             <li><a class="glyphicon glyphicon-file" href="profile"> 修改资料</a></li>
             <li><a class="glyphicon glyphicon-lock" href="password"> 修改密码</a></li>
             <li><a class="glyphicon glyphicon-off" href="/sys/logout"> 注销</a></li>

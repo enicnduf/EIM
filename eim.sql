@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-07-08 01:21:00
+Date: 2014-07-10 00:18:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,10 +67,6 @@ CREATE TABLE `eim_ent_basic` (
   `space_source` varchar(255) DEFAULT NULL,
   `ppl_num` varchar(255) DEFAULT NULL,
   `equipment` varchar(255) DEFAULT NULL,
-  `misc_1` varchar(255) DEFAULT NULL,
-  `misc_2` varchar(255) DEFAULT NULL,
-  `misc_3` varchar(255) DEFAULT NULL,
-  `misc_4` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`eid`),
   UNIQUE KEY `name` (`name`) USING BTREE,
   UNIQUE KEY `eit` (`eid`) USING BTREE
@@ -79,13 +75,13 @@ CREATE TABLE `eim_ent_basic` (
 -- ----------------------------
 -- Records of eim_ent_basic
 -- ----------------------------
-INSERT INTO `eim_ent_basic` VALUES ('1', '测试公司123', '3123', '', '12', '123123', '', '', '123', '1231', '12312', '23123', '', '', '3123', '123123', '123', '', '', null, null, null, null, null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('8', '432134', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null, null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('9', 'adsfsadfadsf', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null, null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('13', 'adsfsadfadsfasdf', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null, null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('17', '这是为什么呢', '', '', '', '', '', '', '周星驰', '', '撒旦发', '', '', '', '', '', '', '', '', '', '', '', '', null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('18', '龙门客栈', 'ICAC1234', '酒店', '龙泉县', '213万', '212年', '2013男', '服务业', '私营', '', '', '', '', '', '', '', '', '', '', '', '', '', null, null, null, null);
-INSERT INTO `eim_ent_basic` VALUES ('32', '', '', '', '', '阿什顿飞', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, null, null, null);
+INSERT INTO `eim_ent_basic` VALUES ('1', '测试公司123', '3123', '', '12', '123123', '', '', '123', '1231', '12312', '23123', '', '', '3123', '123123', '123', '', '', null, null, null, null);
+INSERT INTO `eim_ent_basic` VALUES ('8', '432134', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null);
+INSERT INTO `eim_ent_basic` VALUES ('9', 'adsfsadfadsf', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null);
+INSERT INTO `eim_ent_basic` VALUES ('13', 'adsfsadfadsfasdf', '', '123421342', '', '', '', '13421', '', '', '', '34', '', '1234', '', '2134', '', '', '', null, null, null, null);
+INSERT INTO `eim_ent_basic` VALUES ('17', '这是为什么呢', '', '', '', '', '', '', '周星驰', '', '撒旦发', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `eim_ent_basic` VALUES ('18', '龙门客栈', 'ICAC1234', '酒店', '龙泉县', '213万', '212年', '2013男', '服务业', '私营', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `eim_ent_basic` VALUES ('32', '', '', '', '', '阿什顿飞', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `eim_ent_debt`
@@ -116,12 +112,14 @@ DROP TABLE IF EXISTS `eim_ent_expenses`;
 CREATE TABLE `eim_ent_expenses` (
   `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
   `eid` int(10) unsigned NOT NULL,
+  `date` int(13) DEFAULT NULL,
   `water` int(15) DEFAULT NULL,
   `electric` int(15) DEFAULT NULL,
   `salary` int(15) DEFAULT NULL,
   `rent` int(15) DEFAULT NULL,
-  `tax` int(15) DEFAULT NULL,
+  `tax` int(15) DEFAULT '0',
   `memo` text,
+  `dscrptn` text,
   PRIMARY KEY (`id`),
   KEY `eid` (`eid`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -129,8 +127,8 @@ CREATE TABLE `eim_ent_expenses` (
 -- ----------------------------
 -- Records of eim_ent_expenses
 -- ----------------------------
-INSERT INTO `eim_ent_expenses` VALUES ('2', '1', '0', '0', '0', '0', '0', '');
-INSERT INTO `eim_ent_expenses` VALUES ('3', '1', '1231232', '0', '0', '0', '0', '');
+INSERT INTO `eim_ent_expenses` VALUES ('2', '1', null, '0', '0', '0', '0', '0', '', null);
+INSERT INTO `eim_ent_expenses` VALUES ('3', '1', null, '1231232', '0', '0', '0', '0', '', null);
 
 -- ----------------------------
 -- Table structure for `eim_ent_focus`
@@ -403,10 +401,11 @@ CREATE TABLE `eim_sys_users` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`) USING BTREE,
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of eim_sys_users
 -- ----------------------------
 INSERT INTO `eim_sys_users` VALUES ('1', 'admin', 'f12bRGMbvlxnKDT1762yGOjEAxiN4XocDTtV58nPIBbDl2Q', '管理员', '系统管理员1', '1111', '');
 INSERT INTO `eim_sys_users` VALUES ('9', 'newman', '6fe0eh75YmS+g2ubE0zAmewc5ZoX4iJ4RwkSaaR0Bwh8C7g', '', 'admin', '1111', '');
+INSERT INTO `eim_sys_users` VALUES ('10', 'tester', 'f12bRGMbvlxnKDT1762yGOjEAxiN4XocDTtV58nPIBbDl2Q', '测试账号', '测试部门', '1000', null);

@@ -21,7 +21,7 @@ $config['ent_basic_column'] = array('name' => '企业名称', 'license' => '营�
 $config['ent_production_column'] = array('date' => '时间', 'quantity' => '生产总值', 'sales' => '销售额', 
 			'profit' => '利润', 'stock' => '存货', 'receivable' => '应收', 'memo' => '备注');
 
-$config['ent_expenses_column'] = array('water' => '水费', 'electric' => '电费', 'salary' => '工资', 
+$config['ent_expenses_column'] = array('date' => '时间', 'water' => '水费', 'electric' => '电费', 'salary' => '工资', 
 			'rent' => '租金', 'tax' => '纳税', 'memo' => '备注');
 
 $config['ent_managers_column'] = array('position' => '职位', 'name' => '姓名', 'birth' => '出生年月', 

@@ -20,17 +20,17 @@ $btn_submit = array('name'=>'submit','id'=>'submit','type'=>'submit','class'=>'b
     <![endif]-->
 </head>
 <body>
-<div class="container-fluid bg-primary container-login">
-	<div class="container center-block">
-		<div class="row-padding-0">&nbsp;</div>
-		<div class="row">
+<div class="container-fluid container-login bg-dark">
+	<div class="row-padding-0">&nbsp;</div>
+	<div class="bg-primary row padding-sm">
+		<div class="container center-block">
 		    <div class="col-xs-6 col-md-7 col-lg-7 vcenter">
 		        <h1>企业信息管理系统</h1>
 		    </div><!--
-		--><div class="col-xs-6 col-md-5 col-lg-5 vcenter">
+		 --><div class="col-xs-6 col-md-5 col-lg-5 vcenter">
 		        <div class="panel-default">
 		        	<div class="panel-heading">用户登陆</div>
-    				<div class="panel-body" style="background: #fff; color: #000">
+					<div class="panel-body" style="background: #fff; color: #000">
 		        		<?=form_open('/sys/login',array('name'=>'loginForm','id'=>'loginForm','class'=>'loginForm form-horizontal','role'=>'form'))?>
 				        <?=form_hidden(array('table_name'=>'sys_user'))?>
 				        <div class="form-group">
@@ -40,7 +40,7 @@ $btn_submit = array('name'=>'submit','id'=>'submit','type'=>'submit','class'=>'b
 						            <span class="input-group-addon glyphicon glyphicon-user"></span>
 						            <?=form_input(array('name'=>'username','id'=>'inputUsername','class'=>'form-control',
 						                                'placeholder'=>'请输入'))?>
-                            	</div>
+	                        	</div>
 				            </div>
 			        	</div>
 			        	<div class="form-group">
@@ -59,9 +59,10 @@ $btn_submit = array('name'=>'submit','id'=>'submit','type'=>'submit','class'=>'b
 		        </div>
 		    </div>
 		</div>
-		<div class="row-padding-1">&nbsp;</div>
 	</div>
+	<div class="row-padding-1">&nbsp;</div>
 </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?=$this->config->item('base_url')?>js/jquery.min.js"></script>
     <script src="<?=$this->config->item('base_url')?>js/jquery.form.min.js"></script>

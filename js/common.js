@@ -166,8 +166,8 @@ function getLocationParam(param){
 }
 
 function centeralize(){
-	$document_heigh = $(document).height();
+	$window_height = $(window).height();
     $row_height = $(".row").height();
-    $(".row-padding-0").css('height',($document_heigh - $row_height) / 2 - 50)
-    $(".row-padding-1").css('height',($document_heigh - $row_height) / 2 + 50)
+    $(".row-padding-0").css('height',($window_height - $row_height) / 2 - 50)
+    $(".row-padding-1").css('height',($window_height - $row_height) / 2 + 50)
 }

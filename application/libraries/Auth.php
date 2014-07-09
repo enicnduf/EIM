@@ -29,28 +29,29 @@ class Auth {
                 return $cookie;
             }
 			else{
-				return FALSE;
+				return false;
 			}
         }else{
-			return FALSE;
+			return false;
 		}
     }
 
     function is_admin() {
         //check the cookie
-        if ($this->CI->input->cookie('eim_admin')) {
+        $info = $this->authcode($this->CI->input->cookie('eim_user'));
+        if ($info) {
             //the cookie is there, lets log the customer back in.
-            $info = $this->authcode($this->CI->input->cookie('eim_admin'));
+            $info = $this->authcode($info);
             $cookie = json_decode($info, true);
 
-            if (is_array($cookie) && !empty($cookie)) {
-				return $cookie;
+            if (is_array($cookie) && $cookie['role']=='1111') {
+				return true;
             }
 			else{
-				return FALSE;
+				return false;
 			}
         }else{
-			return FALSE;
+			return false;
 		}
     }
 
