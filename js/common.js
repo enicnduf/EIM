@@ -1,7 +1,8 @@
 var $full_url = "http://" + window.location.host + window.location.pathname;
-var $index_url = "http://" + window.location.host + '/www/eim/ent/';
+var $index_url = "http://" + window.location.host + "/eim/ent/";
 var $path_name = window.location.pathname;
 var $limit = 8;
+var $iframe_seq = 1;
 $(document).ready(function(){
 	$.ajaxSetup({cache:false})
 	/**
@@ -74,13 +75,13 @@ $(document).ready(function(){
 
 	$(".delete").on('click',function(){
 		if(confirm('确认删除这条记录？')){
-			$eid = $(this).attr('id');
+			$uid = $(this).attr('id');
 			$table_name = $(this).attr('name');
 			$url = 'delete';
 			$.post($url,
-				{table_name: $table_name, id: $eid},
+				{table_name: $table_name, id: $uid},
 				function(data){
-					window.location.href = $index_url;
+					window.history.go(-1);
 				}
 			)
 		}
@@ -124,10 +125,34 @@ $(document).ready(function(){
 	/**
 	* List click
 	**/
-	$(".list_item").on('click',function(){
+	var $list_jump = true;
+	$(".no_jump").on('click',function(){
+		$list_jump = false;
+	})
+	$(".docx").on('click',function(){
 		$id = $(this).attr('id');
-		$type = $(this).attr('name');
-		window.open($index_url + $type + "?id=" + $id, "_blank");
+		$index = $(this).attr('name');
+		$(this).toggle();
+		$(this).next().toggle();
+		$url =  "http://" + window.location.host + '/eim/docx';
+		$.post($url,
+			{id: $id, index: $index},
+			function(data){
+				$data = data.split('|');
+				savefile($data[0]);
+				$("#"+$data[1]+" .docx").toggle();
+				$("#"+$data[1]+" .docx").next().toggle();
+			}
+		);
+	})
+
+	$(".list_item").on('click',function(){
+		if($list_jump){
+			$id = $(this).attr('id');
+			$type = $(this).attr('name');
+			window.open($index_url + $type + "?id=" + $id, "_blank");
+		}
+		$list_jump = true;
 	})
 	/**
 	* Paging
@@ -166,8 +191,21 @@ function getLocationParam(param){
 }
 
 function centeralize(){
-	$window_height = $(window).height();
+	$document_height = $(document).height();
     $row_height = $(".row").height();
-    $(".row-padding-0").css('height',($window_height - $row_height) / 2 - 50)
-    $(".row-padding-1").css('height',($window_height - $row_height) / 2 + 50)
+    $(".row-padding-0").css('height',($document_height - $row_height) / 2 - 50)
+    $(".row-padding-1").css('height',($document_height - $row_height) / 2)
+}
+
+function savefile($file_path){
+    var hiddenIFrameID = 'hiddenDownloader' + $iframe_seq,
+    iframe = document.getElementById(hiddenIFrameID);
+    $iframe_seq++;
+    if (iframe === null) {
+        iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    iframe.src = $file_path;
 }

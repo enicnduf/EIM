@@ -52,7 +52,7 @@ $i = 1;
             <?endif?>
         </table>
         <?=form_open('ent/inputSave',array('name'=>$t_name.'Form','id'=>$t_name.'Form','class'=>'inputForm form-horizontal','role'=>'form'))?>
-        <?=form_hidden(array('table_name'=>$t_name,'pid'=>$pid,'new'=>'1'))?>
+        <?=form_hidden(array('table_name'=>$t_name,'index'=>'pid','id'=>$pid,'new'=>'1'))?>
         <?foreach($column_name as $c_name => $c_dscrptn):?>
         <div class="form-group col-lg-6">
             <label for="input<?=$c_name?>" class="col-sm-4 control-label"><?=$c_dscrptn?></label>

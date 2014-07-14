@@ -3,5 +3,5 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d 
 
-RewriteCond /www/eim/$1 !^(index\.php|images|js|css|bootstrap|robots\.txt)
-RewriteRule ^(.*)$ /www/eim/index.php/$1 [L]
+RewriteCond /eim/$1 !^(index\.php|images|js|css|bootstrap|PhpWord|output|robots\.txt)
+RewriteRule ^(.*)$ /eim/index.php/$1 [L]

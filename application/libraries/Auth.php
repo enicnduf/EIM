@@ -19,16 +19,15 @@ class Auth {
 
     function is_logged_in() {
         //check the cookie
-        if ($this->CI->input->cookie('eim_user')) {
+        $info = $this->authcode($this->CI->input->cookie('eim_user'));
+        if ($info) {
             //the cookie is there, lets log the customer back in.
-            $info = $this->authcode($this->CI->input->cookie('eim_user'));
             $cookie = json_decode($info, true);
 
             if (is_array($cookie) && !empty($cookie)) {
 				$this->generateCookie('eim_user', $this->CI->input->cookie('eim_user'), 1800);
                 return $cookie;
-            }
-			else{
+            } else {
 				return false;
 			}
         }else{
@@ -41,16 +40,14 @@ class Auth {
         $info = $this->authcode($this->CI->input->cookie('eim_user'));
         if ($info) {
             //the cookie is there, lets log the customer back in.
-            $info = $this->authcode($info);
             $cookie = json_decode($info, true);
 
-            if (is_array($cookie) && $cookie['role']=='1111') {
+            if (is_array($cookie) && intval(substr($cookie['role'], 3, 1))>0) {
 				return true;
-            }
-			else{
+            } else {
 				return false;
 			}
-        }else{
+        } else {
 			return false;
 		}
     }

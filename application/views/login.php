@@ -20,9 +20,9 @@ $btn_submit = array('name'=>'submit','id'=>'submit','type'=>'submit','class'=>'b
     <![endif]-->
 </head>
 <body>
-<div class="container-fluid container-login bg-dark">
+<div class="container-fluid container-login bg-primary">
 	<div class="row-padding-0">&nbsp;</div>
-	<div class="bg-primary row padding-sm">
+	<div class="row padding-sm">
 		<div class="container center-block">
 		    <div class="col-xs-6 col-md-7 col-lg-7 vcenter">
 		        <h1>企业信息管理系统</h1>

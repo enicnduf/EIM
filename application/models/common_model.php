@@ -60,8 +60,8 @@ class Common_model extends CI_Model{
         return $count;
     }
 
-    public function setData($table_name, $arr){
-    	if( empty($arr['eid']) && empty($arr['pid']) && empty($arr['uid']) ){
+    public function setData($table_name, $arr, $new){
+    	if($new !== false){
     		$this->db->insert($table_name, $arr);
             $id = $this->db->insert_id();
             return $id;
@@ -77,7 +77,18 @@ class Common_model extends CI_Model{
         if(is_array($id)){
             $this->db->where_in('id',$id);
         }else{
-            $this->db->where('eid', $id);
+            switch ($table_name) {
+                case 'ent_basic':
+                    $index = 'eid';
+                    break;
+                case 'peson_basic':
+                    $index = 'pid';
+                    break;
+                default:
+                    $index = 'uid';
+                    break;
+            }
+            $this->db->where($index, $id);
         }
         $this->db->delete($table_name);
     }

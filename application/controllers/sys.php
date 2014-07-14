@@ -77,6 +77,6 @@ class Sys extends CI_Controller {
 
     public function logout(){
     	$this->auth->logout();
-    	header('Location: /www/eim/ent/index');
+    	header('Location: '.base_url().'ent/index');
     }
 }

@@ -46,6 +46,9 @@ thead {font-weight: bold;}
 .list_item {
 	cursor: pointer;
 }
+.no_jump {
+	cursor: default;
+}
 #current {
 	color:red;
 }

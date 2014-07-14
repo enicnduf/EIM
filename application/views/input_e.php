@@ -27,7 +27,7 @@ $i = 1;
 <?foreach($tables_name_ent as $t_name => $t_dscrptn):?>
 <?$column_name = $tables_config[$t_name.'_column'];?>
 <div class="panel panel-info">
-    <div class="panel-heading"><?=$value?></div>
+    <div class="panel-heading"><?=$t_dscrptn?></div>
     <div class="panel-body">
         <table class="table table-bordered table-striped">
             <tr>
@@ -52,11 +52,11 @@ $i = 1;
             <?endif?>
         </table>
         <?=form_open('ent/inputSave',array('name'=>$t_name.'Form','id'=>$t_name.'Form','class'=>'inputForm form-horizontal','role'=>'form'))?>
-        <?=form_hidden(array('table_name'=>$t_name,'eid'=>$eid,'new'=>'1'))?>
+        <?=form_hidden(array('table_name'=>$t_name,'index'=>'eid','id'=>$eid,'new'=>'1'))?>
         <?foreach($column_name as $c_name => $c_dscrptn):?>
         <div class="form-group col-lg-6">
-            <label for="input<?=$c_name?>" class="col-sm-2 control-label"><?=$c_dscrptn?></label>
-            <div class="col-sm-4">
+            <label for="input<?=$c_name?>" class="col-sm-4 control-label"><?=$c_dscrptn?></label>
+            <div class="col-sm-8">
             <?=form_input(array('name'=>$c_name,'id'=>'input'.$c_name,'class'=>'form-control','placeholder'=>'请输入'))?>
             </div>
         </div>

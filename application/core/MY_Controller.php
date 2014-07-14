@@ -8,10 +8,6 @@ class MY_Controller extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        header("Content-Type: text/html; charset=utf-8");
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Pragma: no-cache");
         $this->load->model('Common_model');
         $this->load->library('Auth');
         $this->load->config('tables_config',TRUE);
@@ -27,6 +23,39 @@ class MY_Controller extends CI_Controller {
                                             '企业信息管理系统', 
                                             '首页');
         $this->_loadView('login', $view_data, $header_data, $single_view = TRUE);
+    }
+
+    protected function _checkRole($role, $role_type){
+        switch ($role_type) {
+            case 'view_e':
+                $check_pos = 1;
+                $check_value = 1;
+                break;
+            case 'input_e':
+                $check_pos = 1;
+                $check_value = 2;
+                break;
+            case 'view_p':
+                $check_pos = 2;
+                $check_value = 1;
+                break;
+            case 'input_p':
+                $check_pos = 2;
+                $check_value = 2;
+                break;
+            case 'users':
+                $check_pos = 3;
+                $check_value = 1;
+            default:
+                $check_pos = 0;
+                $check_value = 1;
+                break;
+        }
+        if (intval(substr($role, $check_pos, 1)) >= $check_value) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected function _loadView($page_name, $view_data, $header_data, $single_view = FALSE){
@@ -62,9 +91,20 @@ class MY_Controller extends CI_Controller {
         switch($action){
             case 'alert': $this->_js('js','alert("'.$string.'")'); break;
             case 'back':  $this->_js('js','window.history.go(-1);location.reload;'); break;
-            case 'index': $this->_js('js','window.location.href='.$this->config->item('base_url')); break;
-            case 'jump': $this->_js('js','window.location.href='.$string); break;
+            case 'index': $this->_js('js','window.location.href="'.base_url().'ent/"'); break;
+            case 'jump': $this->_js('js','window.location.href="'.$string.'"'); break;
             default: echo '<script lang="javascript">'.$string.'</script>'; break;
+        }
+    }
+
+    protected function _numberCharacter($number){
+        $character = $this->tables_config['number'];
+        if ($number > 10){
+            $single = $number % 10;
+            $ten = floor($number / 10);
+            return $character[$ten] + '十' + $character[$single];
+        } else {
+            return $character[$number];
         }
     }
 }

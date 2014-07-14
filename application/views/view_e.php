@@ -58,8 +58,8 @@ if($eid):?>
 <?else:?>
 <?/**************************************************************企业列表****************************************************************/?>
 <div class="container">
-<div class="panel panel-default">
-    <div class="panel-heading">企业列表</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">企业列表</div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -67,6 +67,7 @@ if($eid):?>
                     <?foreach($tables_config['list_column_ent'] as $c_name => $c_dscrptn):?>
                         <td class="col-md-<?=$tables_config['column_width'][$c_name]?>"><?=$c_dscrptn?></td>
                     <?endforeach?>
+                        <td class="col-md-1">导出</td>
                 </tr>
                 </thead>
             <?foreach($main_data as $key => $value):?>
@@ -74,12 +75,15 @@ if($eid):?>
                     <?foreach($tables_config['list_column_ent'] as $c_name => $c_dscrptn):?>
                         <td><?=$value[$c_name]?></td>
                     <?endforeach?>
+                    <td class="no_jump"><button class="btn btn-primary docx" id="<?=$value['eid']?>" name="eid">导出</button>
+                        <img style="display:none; width:34px; height:34px;" src="../images/loading.gif" />
+                    </td>
                 </tr>
             <?$i++?>
             <?endforeach?>
             <?while($i<$limit):?>
                 <tr>
-                    <td colspan="<?=count($tables_config['list_column_ent'])?>">&nbsp;</td>
+                    <td colspan="<?=(count($tables_config['list_column_ent'])+1)?>">&nbsp;</td>
                 </tr>
             <?$i++?>
             <?endwhile?>

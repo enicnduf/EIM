@@ -4,7 +4,7 @@ $header_color = array('#226aaa','#226aaa','#32be6a','#226aaa','#32be6a');
 $active[$current] = ' class="active"';
 $search_options = array('1' => array('name' => '企业名称', 'type' => '企业类型', 'industry' => '企业分类', 'kind' => '企业性质'),
                         '3' => array('name' => '个人姓名'));
-$cookie = $this->auth->is_logged_in();
+$user_data = $this->auth->is_logged_in();
 ?>
 <html>
 <head>
@@ -14,9 +14,9 @@ $cookie = $this->auth->is_logged_in();
     <title><?=empty($title) ? '企业信息管理系统' : $title?></title>
 
     <!-- Bootstrap -->
-    <link href="<?=$this->config->item('base_url')?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?=$this->config->item('base_url')?>bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="<?=$this->config->item('base_url')?>css/common.css" rel="stylesheet" />
+    <link href="<?=base_url()?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?=base_url()?>bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="<?=base_url()?>css/common.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,12 +69,12 @@ $cookie = $this->auth->is_logged_in();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"> <?=$user_data['name']?><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <?if($cookie['role']=='1111'):?>
+            <?if($this->auth->is_admin()):?>
             <li><a class="glyphicon glyphicon-asterisk" href="users"> 用户管理</a></li>
             <?endif?>
             <li><a class="glyphicon glyphicon-file" href="profile"> 修改资料</a></li>
             <li><a class="glyphicon glyphicon-lock" href="password"> 修改密码</a></li>
-            <li><a class="glyphicon glyphicon-off" href="/sys/logout"> 注销</a></li>
+            <li><a class="glyphicon glyphicon-off" href="<?=base_url()?>sys/logout"> 注销</a></li>
           </ul>
         </li>
       </ul>
